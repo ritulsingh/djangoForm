@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data</title>
+    <style>
+        *{
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .form-data{
+            margin-top: 50px;
+            font-size: 25px;
+            text-align: center;
+        }
+        h1{
+        display: block;
+        font-size: 40px;
+        padding: 15px;
+        text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-data">
+        {% csrf_token %}
+        <!-- The names are:
+        {%for item in list%}
+        <li>{{item}}</li>
+        {% endfor %} -->
+        <h1>Information</h1>
+        <p><b>Name:</b> {{ list.0 }}</p>
+        <p><b>Email:</b> {{ list.1 }}</p>
+        <p><b>Mobile Number:</b> {{ list.2 }}</p>
+        <p><b>Location:</b> {{ list.3 }}</p>
+        <p><b>Company Name:</b> {{ list.4 }}</p>
+        <p><b>Brand:</b> {{ list.5 }}</p>
+        <p><b>Type:</b> {{ list.6 }}</p>
+        <p><b>Average Revenue:</b> {{ list.7}} Lakhs</p>
+    </div>
+</body>
+
+</html>
