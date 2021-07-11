@@ -9,3 +9,4 @@ class Information(models.Model):
     brand = models.CharField(max_length=200)
     clint_type = models.CharField(max_length=200)
     avg_Revenue = models.IntegerField()
+

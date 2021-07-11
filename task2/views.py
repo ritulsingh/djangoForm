@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from numpy.core.fromnumeric import sometrue
 from .models import Information
 from .forms import MyForm
+import matplotlib.pyplot as plt
+import pandas as pd
 
 # Create your views here.
-
 def my_form(request):
     if request.method == "POST":
         form = MyForm(request.POST)
@@ -24,3 +26,26 @@ def my_form(request):
     else:
         form = MyForm()
     return render(request, 'index.html', {'form': form})
+
+def index(request):
+    if "GET" == request.method:
+        return render(request, 'fileUpload.html', {'something':False})
+    else:
+        excel_file = request.FILES["excel_file"]
+
+        # you may put validations here to check extension or file size
+        df = pd.read_excel(excel_file)
+
+        # getting a particular sheet by name out of many sheets
+        worksheet = df['ABC'].value_counts()
+        excel = worksheet.to_dict()
+        excel = dict(reversed(list(excel.items())))
+
+        print(excel)
+        print(type(excel))
+        fig = plt.figure(figsize =(5, 5))
+        plt.pie(excel.values(), labels = excel.keys())
+        plt.legend(title = "ABC")
+        plt.savefig('media/download.png',dpi=100)
+        
+        return render(request, 'fileUpload.html', {'dictionary': excel, 'something':True})
